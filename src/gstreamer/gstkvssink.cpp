@@ -1405,6 +1405,7 @@ gst_kvs_sink_handle_buffer (GstCollectPads * pads,
                                      std::chrono::nanoseconds(buf->pts),
                                      std::chrono::nanoseconds(buf->dts), kinesis_video_flags, track_id, data->frame_count);
         LOG_DEBUG("Frame count: " << data->frame_count);
+        LOG_DEBUG("put_frame result:" << put_frame_status);
         data->frame_count++;
     } else {
         LOG_WARN("GStreamer buffer is invalid for " << kvssink->stream_name);
