@@ -1330,7 +1330,15 @@ gst_kvs_sink_handle_buffer (GstCollectPads * pads,
                         (GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_HEADER) && (!GST_BUFFER_PTS_IS_VALID(buf) || !GST_BUFFER_DTS_IS_VALID(buf)));
         if (isDroppable) {
             LOG_DEBUG("NOT Dropping frame with flag: " << GST_BUFFER_FLAGS(buf) << " for " << kvssink->stream_name);
-            // goto CleanUp;
+            LOG_DEBUG("GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_CORRUPTED): " << GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_CORRUPTED));
+            LOG_DEBUG("GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DECODE_ONLY): " << GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DECODE_ONLY));
+            LOG_DEBUG("GST_BUFFER_FLAGS(buf) == GST_BUFFER_FLAG_DISCONT): " << GST_BUFFER_FLAGS(buf) == GST_BUFFER_FLAG_DISCONT));
+            LOG_DEBUG("GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DISCONT): " << GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DISCONT));
+            LOG_DEBUG("GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DELTA_UNIT)): " << GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DELTA_UNIT));
+            LOG_DEBUG("GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_HEADER): " << GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_HEADER));
+            LOG_DEBUG("GST_BUFFER_PTS_IS_VALID(buf): " << GST_BUFFER_PTS_IS_VALID(buf));
+            LOG_DEBUG("GST_BUFFER_DTS_IS_VALID(buf): " << GST_BUFFER_DTS_IS_VALID(buf));
+            goto CleanUp
         }
 
         // In offline mode, if user specifies a file_start_time, the stream will be configured to use absolute
