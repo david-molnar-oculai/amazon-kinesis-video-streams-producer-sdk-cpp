@@ -1360,6 +1360,7 @@ gst_kvs_sink_handle_buffer (GstCollectPads * pads,
         track_id = kvs_sink_track_data->track_id;
 
         if (!gst_buffer_map(buf, &info, GST_MAP_READ)){
+            LOG_DEBUG("gst_buffer_map error");
             goto CleanUp;
         }
 
@@ -1398,6 +1399,7 @@ gst_kvs_sink_handle_buffer (GstCollectPads * pads,
             }
         }
 
+        LOG_DEBUG("!!!!!!!!! calling put_frame !!!!!!!!!");
         put_frame_status = put_frame(data, info.data, info.size,
                                      std::chrono::nanoseconds(buf->pts),
                                      std::chrono::nanoseconds(buf->dts), kinesis_video_flags, track_id, data->frame_count);
