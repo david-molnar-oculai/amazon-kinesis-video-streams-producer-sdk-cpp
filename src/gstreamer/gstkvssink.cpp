@@ -1370,6 +1370,7 @@ gst_kvs_sink_handle_buffer (GstCollectPads * pads,
             case AUDIO_ONLY:
             case VIDEO_ONLY:
                 if (!delta) {
+                    LOG_DEBUG("Setting keyframe flag");
                     kinesis_video_flags = FRAME_FLAG_KEY_FRAME;
                 }
                 break;
@@ -1403,6 +1404,7 @@ gst_kvs_sink_handle_buffer (GstCollectPads * pads,
         put_frame_status = put_frame(data, info.data, info.size,
                                      std::chrono::nanoseconds(buf->pts),
                                      std::chrono::nanoseconds(buf->dts), kinesis_video_flags, track_id, data->frame_count);
+        LOG_DEBUG("Frame count: " << data->frame_count);
         data->frame_count++;
     } else {
         LOG_WARN("GStreamer buffer is invalid for " << kvssink->stream_name);
