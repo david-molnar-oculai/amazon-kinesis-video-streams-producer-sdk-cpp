@@ -30,15 +30,14 @@ bool KinesisVideoStream::putFrame(KinesisVideoFrame& frame) const {
 }
 
 STATUS KinesisVideoStream::statusPutFrame(KinesisVideoFrame& frame) const {
-    if (debug_dump_frame_info_) {
-        LOG_DEBUG("[" << this->stream_name_ << "] pts: " << frame.presentationTs << ", dts: " << frame.decodingTs << ", duration: " << frame.duration << ", size: " << frame.size << ", trackId: " << frame.trackId
-                          << ", isKey: " << CHECK_FRAME_FLAG_KEY_FRAME(frame.flags));
-    }
+    LOG_DEBUG("[" << this->stream_name_ << "] pts: " << frame.presentationTs << ", dts: " << frame.decodingTs << ", duration: " << frame.duration << ", size: " << frame.size << ", trackId: " << frame.trackId
+                      << ", isKey: " << CHECK_FRAME_FLAG_KEY_FRAME(frame.flags));
+
 
     assert(0 != stream_handle_);
     STATUS status = putKinesisVideoFrame(stream_handle_, &frame);
     if (STATUS_FAILED(status)) {
-        LOG_ERROR("Put frame for " << this->stream_name_ << " failed with 0x" << std::hex << status);
+        LOG_DEBUG("Put frame for " << this->stream_name_ << " failed with 0x" << std::hex << status);
         return status;
     }
 
