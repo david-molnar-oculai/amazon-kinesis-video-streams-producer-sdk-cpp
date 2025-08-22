@@ -1338,7 +1338,7 @@ gst_kvs_sink_handle_buffer (GstCollectPads * pads,
             LOG_DEBUG("GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_HEADER): " << GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_HEADER));
             LOG_DEBUG("GST_BUFFER_PTS_IS_VALID(buf): " << GST_BUFFER_PTS_IS_VALID(buf));
             LOG_DEBUG("GST_BUFFER_DTS_IS_VALID(buf): " << GST_BUFFER_DTS_IS_VALID(buf));
-            goto CleanUp
+            goto CleanUp;
         }
 
         // In offline mode, if user specifies a file_start_time, the stream will be configured to use absolute
